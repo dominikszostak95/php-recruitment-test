@@ -6,7 +6,6 @@ use Snowdog\DevTest\Core\Database;
 
 class PageManager
 {
-
     /**
      * @var Database|\PDO
      */
@@ -48,5 +47,46 @@ class PageManager
         $statement->bindParam(':now', $now, \PDO::PARAM_STR);
         $statement->bindParam(':id', $pageId, \PDO::PARAM_INT);
         $statement->execute();
+    }
+
+    public function getTotalUserPageCount(User $user)
+    {
+        $userId = $user->getUserId();
+
+        $query = $this->database->prepare(
+            'SELECT COUNT(*) FROM pages p INNER JOIN websites w ON p.website_id = w.website_id where w.user_id = :user'
+        );
+        $query->bindParam(':user', $userId, \PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchColumn();
+    }
+
+    public function getMostRecentlyUserVisitedPage(User $user)
+    {
+        $userId = $user->getUserId();
+
+        $query = $this->database->prepare(
+            'SELECT w.hostname, p.url FROM pages p INNER JOIN websites w ON w.website_id = p.website_id WHERE w.user_id = :user_id ORDER BY last_visited DESC LIMIT 1'
+        );
+        $query->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $query->execute();
+        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        return count($result) > 0 ? $result[0]['hostname'] . '/' . $result[0]['url'] : null;
+    }
+
+    public function getLeastRecentlyUserVisitedPage(User $user)
+    {
+        $userId = $user->getUserId();
+
+        $query = $this->database->prepare(
+            'SELECT w.hostname, p.url FROM pages p INNER JOIN websites w ON w.website_id = p.website_id WHERE w.user_id = :user_id ORDER BY last_visited ASC LIMIT 1'
+        );
+        $query->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $query->execute();
+        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        return count($result) > 0 ? $result[0]['hostname'] . '/' . $result[0]['url'] : null;
     }
 }
