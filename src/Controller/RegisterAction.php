@@ -4,14 +4,21 @@ namespace Snowdog\DevTest\Controller;
 
 use Snowdog\DevTest\Model\UserManager;
 
+/**
+ * Class RegisterAction
+ * @package Snowdog\DevTest\Controller
+ */
 class RegisterAction
 {
-
     /**
      * @var UserManager
      */
     private $userManager;
 
+    /**
+     * RegisterAction constructor.
+     * @param UserManager $userManager
+     */
     public function __construct(UserManager $userManager)
     {
         $this->userManager = $userManager;
@@ -19,6 +26,11 @@ class RegisterAction
 
     public function execute()
     {
+        if (isset($_SESSION['login'])) {
+            require __DIR__ . '/../view/403.phtml';
+            exit;
+        }
+
         $password = $_POST['password'];
         $confirm = $_POST['confirm'];
         $name = $_POST['name'];

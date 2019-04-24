@@ -7,6 +7,10 @@ use Snowdog\DevTest\Model\UserManager;
 use Snowdog\DevTest\Model\WebsiteManager;
 use Snowdog\DevTest\Model\PageManager;
 
+/**
+ * Class IndexAction
+ * @package Snowdog\DevTest\Controller
+ */
 class IndexAction
 {
     /**
@@ -15,7 +19,7 @@ class IndexAction
     private $websiteManager;
 
     /**
-     * @var
+     * @var PageManager
      */
     private $pageManager;
 
@@ -24,6 +28,12 @@ class IndexAction
      */
     private $user;
 
+    /**
+     * IndexAction constructor.
+     * @param UserManager $userManager
+     * @param WebsiteManager $websiteManager
+     * @param PageManager $pageManager
+     */
     public function __construct(UserManager $userManager, WebsiteManager $websiteManager, PageManager $pageManager)
     {
         $this->websiteManager = $websiteManager;
@@ -33,6 +43,9 @@ class IndexAction
         }
     }
 
+    /**
+     * @return array
+     */
     protected function getWebsites()
     {
         if($this->user) {
@@ -41,16 +54,25 @@ class IndexAction
         return [];
     }
 
+    /**
+     * @return int
+     */
     protected function getTotalUserPageCount()
     {
         return $this->pageManager->getTotalUserPageCount($this->user);
     }
 
+    /**
+     * @return null|string
+     */
     protected function getMostRecentlyUserVisitedPage()
     {
         return $this->pageManager->getMostRecentlyUserVisitedPage($this->user);
     }
 
+    /**
+     * @return null|string
+     */
     protected function getLeastRecentlyUserVisitedPage()
     {
         return $this->pageManager->getLeastRecentlyUserVisitedPage($this->user);
@@ -58,6 +80,11 @@ class IndexAction
 
     public function execute()
     {
+        if (!isset($_SESSION['login'])) {
+            header('Location: /login');
+            exit;
+        }
+
         require __DIR__ . '/../view/index.phtml';
     }
 }

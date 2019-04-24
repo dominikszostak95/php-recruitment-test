@@ -2,6 +2,10 @@
 
 namespace Snowdog\DevTest\Model;
 
+/**
+ * Class Page
+ * @package Snowdog\DevTest\Model
+ */
 class Page
 {
     public $page_id;

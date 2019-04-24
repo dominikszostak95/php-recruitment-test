@@ -4,6 +4,10 @@ namespace Snowdog\DevTest\Migration;
 
 use Snowdog\DevTest\Core\Database;
 
+/**
+ * Class Version3
+ * @package Snowdog\DevTest\Migration
+ */
 class Version3
 {
     /**
@@ -11,6 +15,11 @@ class Version3
      */
     private $database;
 
+    /**
+     * Version3 constructor.
+     *
+     * @param Database $database
+     */
     public function __construct(
         Database $database
     ) {

@@ -4,6 +4,10 @@ namespace Snowdog\DevTest\Model;
 
 use Snowdog\DevTest\Core\Database;
 
+/**
+ * Class WebsiteManager
+ * @package Snowdog\DevTest\Model
+ */
 class WebsiteManager
 {
     /**
@@ -11,11 +15,21 @@ class WebsiteManager
      */
     private $database;
 
+    /**
+     * WebsiteManager constructor.
+     *
+     * @param Database $database
+     */
     public function __construct(Database $database)
     {
         $this->database = $database;
     }
-    
+
+    /**
+     * @param $websiteId
+     *
+     * @return Website
+     */
     public function getById($websiteId) {
         /** @var \PDOStatement $query */
         $query = $this->database->prepare('SELECT * FROM websites WHERE website_id = :id');
@@ -27,6 +41,11 @@ class WebsiteManager
         return $website;
     }
 
+    /**
+     * @param User $user
+     *
+     * @return array
+     */
     public function getAllByUser(User $user)
     {
         $userId = $user->getUserId();
@@ -37,6 +56,13 @@ class WebsiteManager
         return $query->fetchAll(\PDO::FETCH_CLASS, Website::class);
     }
 
+    /**
+     * @param User $user
+     * @param $name
+     * @param $hostname
+     *
+     * @return string
+     */
     public function create(User $user, $name, $hostname)
     {
         $userId = $user->getUserId();

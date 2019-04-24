@@ -5,6 +5,10 @@ namespace Snowdog\DevTest\Controller;
 use Snowdog\DevTest\Model\UserManager;
 use Snowdog\DevTest\Model\WebsiteManager;
 
+/**
+ * Class CreateWebsiteAction
+ * @package Snowdog\DevTest\Controller
+ */
 class CreateWebsiteAction
 {
     /**
@@ -16,6 +20,11 @@ class CreateWebsiteAction
      */
     private $websiteManager;
 
+    /**
+     * CreateWebsiteAction constructor.
+     * @param UserManager $userManager
+     * @param WebsiteManager $websiteManager
+     */
     public function __construct(UserManager $userManager, WebsiteManager $websiteManager)
     {
         $this->userManager = $userManager;
@@ -24,6 +33,11 @@ class CreateWebsiteAction
 
     public function execute()
     {
+        if (!isset($_SESSION['login'])) {
+            header('Location: /login');
+            exit;
+        }
+
         $name = $_POST['name'];
         $hostname = $_POST['hostname'];
 

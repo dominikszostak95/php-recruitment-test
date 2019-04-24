@@ -4,19 +4,32 @@ namespace Snowdog\DevTest\Model;
 
 use Snowdog\DevTest\Core\Database;
 
+/**
+ * Class UserManager
+ * @package Snowdog\DevTest\Model
+ */
 class UserManager
 {
-
     /**
      * @var Database|\PDO
      */
     private $database;
 
+    /**
+     * UserManager constructor.
+     *
+     * @param Database $database
+     */
     public function __construct(Database $database)
     {
         $this->database = $database;
     }
 
+    /**
+     * @param $login
+     *
+     * @return User
+     */
     public function getByLogin($login)
     {
         /** @var \PDOStatement $query */
@@ -29,6 +42,13 @@ class UserManager
         return $user;
     }
 
+    /**
+     * @param $login
+     * @param $password
+     * @param $displayName
+     *
+     * @return string
+     */
     public function create($login, $password, $displayName)
     {
         $salt = hash('sha512', microtime());
@@ -43,12 +63,24 @@ class UserManager
         return $this->database->lastInsertId();
     }
 
+    /**
+     * @param User $user
+     * @param $password
+     *
+     * @return bool
+     */
     public function verifyPassword(User $user, $password)
     {
         $hash = $this->hashPassword($password, $user->getPasswordSalt());
         return $hash === $user->getPasswordHash();
     }
 
+    /**
+     * @param $password
+     * @param $salt
+     *
+     * @return string
+     */
     protected function hashPassword($password, $salt)
     {
         return hash('sha512', $password . $salt);

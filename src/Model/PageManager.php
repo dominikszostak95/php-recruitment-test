@@ -4,6 +4,10 @@ namespace Snowdog\DevTest\Model;
 
 use Snowdog\DevTest\Core\Database;
 
+/**
+ * Class PageManager
+ * @package Snowdog\DevTest\Model
+ */
 class PageManager
 {
     /**
@@ -11,11 +15,20 @@ class PageManager
      */
     private $database;
 
+    /**
+     * PageManager constructor.
+     * @param Database $database
+     */
     public function __construct(Database $database)
     {
         $this->database = $database;
     }
 
+    /**
+     * @param Website $website
+     *
+     * @return array
+     */
     public function getAllByWebsite(Website $website)
     {
         $websiteId = $website->getWebsiteId();
@@ -26,6 +39,12 @@ class PageManager
         return $query->fetchAll(\PDO::FETCH_CLASS, Page::class);
     }
 
+    /**
+     * @param Website $website
+     * @param $url
+     *
+     * @return string
+     */
     public function create(Website $website, $url)
     {
         $websiteId = $website->getWebsiteId();
@@ -37,6 +56,9 @@ class PageManager
         return $this->database->lastInsertId();
     }
 
+    /**
+     * @param Page $page
+     */
     public function setLastVisited(Page $page)
     {
         $pageId = $page->getPageId();
@@ -49,6 +71,11 @@ class PageManager
         $statement->execute();
     }
 
+    /**
+     * @param User $user
+     *
+     * @return int
+     */
     public function getTotalUserPageCount(User $user)
     {
         $userId = $user->getUserId();
@@ -62,6 +89,11 @@ class PageManager
         return $query->fetchColumn();
     }
 
+    /**
+     * @param User $user
+     *
+     * @return null|string
+     */
     public function getMostRecentlyUserVisitedPage(User $user)
     {
         $userId = $user->getUserId();
@@ -76,6 +108,11 @@ class PageManager
         return count($result) > 0 ? $result[0]['hostname'] . '/' . $result[0]['url'] : null;
     }
 
+    /**
+     * @param User $user
+     *
+     * @return null|string
+     */
     public function getLeastRecentlyUserVisitedPage(User $user)
     {
         $userId = $user->getUserId();

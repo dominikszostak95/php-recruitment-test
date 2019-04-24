@@ -2,6 +2,10 @@
 
 namespace Snowdog\DevTest\Model;
 
+/**
+ * Class User
+ * @package Snowdog\DevTest\Model
+ */
 class User
 {
     public $user_id;
@@ -10,6 +14,9 @@ class User
     public $password_salt;
     public $display_name;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->user_id = intval($this->user_id);
@@ -54,6 +61,4 @@ class User
     {
         return $this->display_name;
     }
-    
-
 }
