@@ -1,4 +1,4 @@
-<?php
+git<?php
 
 use Snowdog\DevTest\Command\MigrateCommand;
 use Snowdog\DevTest\Command\WarmCommand;
