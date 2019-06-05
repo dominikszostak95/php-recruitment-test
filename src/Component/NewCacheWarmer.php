@@ -26,6 +26,14 @@ class NewCacheWarmer extends Old_Legacy_CacheWarmer_Warmer
     }
 
     /**
+     * @param string $hostname
+     */
+    public function setHostname($hostname)
+    {
+        $this->hostname = $hostname;
+    }
+
+    /**
      * @param string $ip
      */
     public function setIp($ip)
