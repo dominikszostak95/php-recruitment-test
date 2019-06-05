@@ -21,12 +21,13 @@
 <?php \Snowdog\DevTest\Component\Menu::getInstance()->render() ?>
 
 <div class="container">
-
     <?php if (isset($_SESSION['flash'])): ?>
         <p class="bg-info"><?= $_SESSION['flash'] ?></p>
         <?php unset($_SESSION['flash']) ?>
     <?php endif ?>
     <div>
+
+        <?php var_dump($this->website); ?>
         <?php if ($this->website): ?>
             <h1><?= $this->website->getName() ?></h1>
 
