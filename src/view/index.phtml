@@ -31,7 +31,9 @@
         <h1>Cache Warmer</h1>
         <?php if ($this->user): ?>
             <p class="bg-success">Hello <?= $this->user->getDisplayName() ?>!</p>
-
+            <span>Number of pages: </span> <?= $this->getTotalUserPageCount() ?>
+            <span>Least recently visited page: </span> <?= $this->getLeastRecentlyUserVisitedPage() ?>
+            <span>Most recently visited page: </span> <?= $this->getMostRecentlyUserVisitedPage() ?>
             <div class="padded">
                 <form class="form-inline" method="post" action="/website">
                     <div class="form-group">
@@ -45,6 +47,15 @@
                                placeholder="website.org">
                     </div>
                     <button type="submit" class="btn btn-primary">Add Website</button>
+                </form>
+            </div>
+            <div class="padded">
+                <form class="form-inline" action="/importsitemap" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="sitemapField">Name</label>
+                        <input id="sitemapField" type="file" name="sitemap">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Import Sitemap</button>
                 </form>
             </div>
 
@@ -69,7 +80,6 @@
     </div>
 
 </div><!-- /.container -->
-
-
 </body>
 </html>
+
