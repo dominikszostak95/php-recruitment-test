@@ -43,12 +43,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dominikszostak95/sitemap-parser.git",
-                "reference": "b791e4710339cdf16802c8d72b9d7f3bbd325444"
+                "reference": "590a37c4d0301e424f5164ca11b42462cd3cd49f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dominikszostak95/sitemap-parser/zipball/b791e4710339cdf16802c8d72b9d7f3bbd325444",
-                "reference": "b791e4710339cdf16802c8d72b9d7f3bbd325444",
+                "url": "https://api.github.com/repos/dominikszostak95/sitemap-parser/zipball/590a37c4d0301e424f5164ca11b42462cd3cd49f",
+                "reference": "590a37c4d0301e424f5164ca11b42462cd3cd49f",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "source": "https://github.com/dominikszostak95/sitemap-parser/tree/master",
                 "issues": "https://github.com/dominikszostak95/sitemap-parser/issues"
             },
-            "time": "2019-06-06T10:36:03+00:00"
+            "time": "2019-06-06T12:08:17+00:00"
         },
         {
             "name": "mnapoli/silly",
