@@ -2,6 +2,11 @@
 
 namespace Snowdog\DevTest\Menu;
 
+/**
+ * Class SitemapImportMenu
+ *
+ * @package Snowdog\DevTest\Menu
+ */
 class SitemapImportMenu extends AbstractMenu
 {
     /**

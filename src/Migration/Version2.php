@@ -7,25 +7,41 @@ use Snowdog\DevTest\Model\PageManager;
 use Snowdog\DevTest\Model\UserManager;
 use Snowdog\DevTest\Model\WebsiteManager;
 
+/**
+ * Class Version2
+ *
+ * @package Snowdog\DevTest\Migration
+ */
 class Version2
 {
     /**
      * @var Database|\PDO
      */
     private $database;
+
     /**
      * @var UserManager
      */
     private $userManager;
+
     /**
      * @var WebsiteManager
      */
     private $websiteManager;
+
     /**
      * @var PageManager
      */
     private $pageManager;
 
+    /**
+     * Version2 constructor.
+     *
+     * @param Database $database
+     * @param UserManager $userManager
+     * @param WebsiteManager $websiteManager
+     * @param PageManager $pageManager
+     */
     public function __construct(
         Database $database,
         UserManager $userManager,

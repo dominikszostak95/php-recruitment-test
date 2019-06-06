@@ -31,9 +31,13 @@
         <h1>Cache Warmer</h1>
         <?php if ($this->user): ?>
             <p class="bg-success">Hello <?= $this->user->getDisplayName() ?>!</p>
-            <span>Number of pages: </span> <?= $this->getTotalUserPageCount() ?>
-            <span>Least recently visited page: </span> <?= $this->getLeastRecentlyUserVisitedPage() ?>
-            <span>Most recently visited page: </span> <?= $this->getMostRecentlyUserVisitedPage() ?>
+
+            <div class="padded statistics-box">
+                <span class="col-md-12">Number of pages: <?= $this->getTotalUserPageCount() ?></span>
+                <span class="col-md-12">Least recently visited page: <?= $this->getLeastRecentlyUserVisitedPage() ?></span>
+                <span class="col-md-12">Most recently visited page: <?= $this->getMostRecentlyUserVisitedPage() ?></span>
+            </div>
+
             <div class="padded">
                 <form class="form-inline" method="post" action="/website">
                     <div class="form-group">
@@ -72,4 +76,3 @@
 </div><!-- /.container -->
 </body>
 </html>
-

@@ -5,11 +5,15 @@ namespace Snowdog\DevTest\Component;
 use Old_Legacy_CacheWarmer_Warmer;
 use Old_Legacy_CacheWarmer_Actor;
 
+/**
+ * Class NewCacheWarmer
+ *
+ * @package Snowdog\DevTest\Component
+ */
 class NewCacheWarmer extends Old_Legacy_CacheWarmer_Warmer
 {
     /** @var Old_Legacy_CacheWarmer_Actor */
     private $actor;
-
 
     /** @var string */
     private $hostname;
@@ -41,6 +45,9 @@ class NewCacheWarmer extends Old_Legacy_CacheWarmer_Warmer
         $this->ip = $ip;
     }
 
+    /**
+     * @param $url
+     */
     public function warm($url) {
         sleep(1); // this emulates visit to http://$hostname/$url via $ip
         $this->actor->act($this->hostname, $this->ip, $url);

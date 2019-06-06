@@ -16,3 +16,7 @@ body {
 .padded {
     padding: 15px;
 }
+
+.statistics-box {
+    margin-bottom: 50px;
+}

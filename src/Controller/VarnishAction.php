@@ -10,6 +10,7 @@ use Snowdog\DevTest\Model\VarnishManager;
 
 /**
  * Class VarnishAction
+ *
  * @package Snowdog\DevTest\Controller
  */
 class VarnishAction
@@ -34,11 +35,9 @@ class VarnishAction
      */
     private $varnishManager;
 
-    private $websites;
-    private $varnishes;
-
     /**
      * VarnishAction constructor.
+     *
      * @param UserManager $userManager
      * @param WebsiteManager $websiteManager
      * @param VarnishManager $varnishManager
@@ -62,6 +61,9 @@ class VarnishAction
         require __DIR__ . '/../view/varnish.phtml';
     }
 
+    /**
+     * @return array|null
+     */
     public function getVarnishes()
     {
         if ($this->user) {
@@ -71,6 +73,9 @@ class VarnishAction
         return null;
     }
 
+    /**
+     * @return array|null
+     */
     public function getWebsites()
     {
         if ($this->user) {
@@ -80,6 +85,11 @@ class VarnishAction
         return null;
     }
 
+    /**
+     * @param Varnish $varnish
+     *
+     * @return array
+     */
     public function getAssociatedWebsitesIds(Varnish $varnish)
     {
         $websiteIds = $this->varnishManager->getWebsites($varnish);

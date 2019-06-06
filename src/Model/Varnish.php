@@ -4,12 +4,21 @@ namespace Snowdog\DevTest\Model;
 
 /**
  * Class Website
+ *
  * @package Snowdog\DevTest\Model
  */
 class Varnish
 {
+    /**
+     * @var int
+     */
     public $user_id;
+
+    /**
+     * @var int
+     */
     public $varnish_id;
+
     public $ip;
 
     /**

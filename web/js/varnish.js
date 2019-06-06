@@ -19,7 +19,7 @@ $(document).ready(function(){
         });
 
         request.done(function(response) {
-            $('.container').find('.bg-info').remove();
+            $('.container').find('.bg-success').remove();
             $('body > .container').prepend($('<p class="bg-success"/>').html(response.message));
         });
 

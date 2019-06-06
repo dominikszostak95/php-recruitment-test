@@ -6,6 +6,7 @@ use Snowdog\DevTest\Core\Database;
 
 /**
  * Class VarnishManager
+ *
  * @package Snowdog\DevTest\Model
  */
 class VarnishManager
@@ -25,6 +26,11 @@ class VarnishManager
         $this->database = $database;
     }
 
+    /**
+     * @param User $user
+     *
+     * @return array
+     */
     public function getAllByUser(User $user)
     {
         $userId = $user->getUserId();
@@ -35,6 +41,11 @@ class VarnishManager
         return $query->fetchAll(\PDO::FETCH_CLASS, Varnish::class);
     }
 
+    /**
+     * @param Website $website
+     *
+     * @return array
+     */
     public function getAllByWebsite(Website $website)
     {
         $websiteId = $website->getWebsiteId();
@@ -46,6 +57,11 @@ class VarnishManager
         return $query->fetchAll(\PDO::FETCH_CLASS, Varnish::class);
     }
 
+    /**
+     * @param Varnish $varnish
+     *
+     * @return array
+     */
     public function getWebsites(Varnish $varnish)
     {
         $varnishId = $varnish->getVarnishId();
@@ -56,6 +72,12 @@ class VarnishManager
         return $query->fetchAll(\PDO::FETCH_COLUMN);
     }
 
+    /**
+     * @param User $user
+     * @param $ip
+     *
+     * @return string
+     */
     public function create(User $user, $ip)
     {
         $userId = $user->getUserId();

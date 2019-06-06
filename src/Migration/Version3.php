@@ -6,6 +6,7 @@ use Snowdog\DevTest\Core\Database;
 
 /**
  * Class Version3
+ *
  * @package Snowdog\DevTest\Migration
  */
 class Version3

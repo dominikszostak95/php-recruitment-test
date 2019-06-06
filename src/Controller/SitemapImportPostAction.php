@@ -4,6 +4,7 @@ namespace Snowdog\DevTest\Controller;
 
 use Snowdog\DevTest\Model\SitemapImportManager;
 use Snowdog\DevTest\Model\UserManager;
+use Snowdog\DevTest\Model\User;
 
 /**
  * Class SitemapImportAction
@@ -23,6 +24,11 @@ class SitemapImportPostAction
     private $userManager;
 
     /**
+     * @var User
+     */
+    private $user;
+
+    /**
      * SitemapImportPostAction constructor.
      *
      * @param SitemapImportManager $sitemapImportManager
@@ -40,6 +46,11 @@ class SitemapImportPostAction
 
     public function execute()
     {
+        if (!$this->user) {
+            header('Location: /login');
+            exit;
+        }
+
         $siteMap = $_FILES['sitemap'];
 
         try {

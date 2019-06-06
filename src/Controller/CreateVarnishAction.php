@@ -7,6 +7,7 @@ use Snowdog\DevTest\Model\VarnishManager;
 
 /**
  * Class CreateWebsiteAction
+ *
  * @package Snowdog\DevTest\Controller
  */
 class CreateVarnishAction
@@ -16,10 +17,14 @@ class CreateVarnishAction
      */
     private $userManager;
 
+    /**
+     * @var VarnishManager
+     */
     private $varnishManager;
 
     /**
      * CreateVarnishAction constructor.
+     *
      * @param UserManager $userManager
      * @param VarnishManager $varnishManager
      */
@@ -27,25 +32,27 @@ class CreateVarnishAction
     {
         $this->userManager = $userManager;
         $this->varnishManager = $varnishManager;
+
+        if (isset($_SESSION['login'])) {
+            $this->user = $userManager->getByLogin($_SESSION['login']);
+        }
     }
 
     public function execute()
     {
-        if (!isset($_SESSION['login'])) {
+        if (!$this->user) {
             header('Location: /login');
             exit;
         }
 
         $ip = $_POST['ip'];
-        $user = $this->userManager->getByLogin($_SESSION['login']);
 
-        if ($user) {
-            if ($this->varnishManager->create($user, $ip)) {
-                $_SESSION['flash'] = 'Varnish ' . $ip . ' added!';
-            }
-        } else {
+        if (empty($ip)) {
             $_SESSION['flash'] = 'IP cannot be empty!';
+        } elseif ($this->varnishManager->create($this->user, $ip)) {
+            $_SESSION['flash'] = 'Varnish Server ' . $ip . ' added!';
         }
+
 
         header('Location: /varnish');
     }

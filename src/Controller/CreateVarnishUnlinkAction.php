@@ -7,6 +7,11 @@ use Snowdog\DevTest\Model\Varnish;
 use Snowdog\DevTest\Model\VarnishManager;
 use Snowdog\DevTest\Model\Website;
 
+/**
+ * Class CreateVarnishUnlinkAction
+ *
+ * @package Snowdog\DevTest\Controller
+ */
 class CreateVarnishUnlinkAction
 {
     /**
@@ -19,6 +24,12 @@ class CreateVarnishUnlinkAction
      */
     private $varnishManager;
 
+    /**
+     * CreateVarnishUnlinkAction constructor.
+     *
+     * @param UserManager $userManager
+     * @param VarnishManager $varnishManager
+     */
     public function __construct(UserManager $userManager, VarnishManager $varnishManager)
     {
         $this->userManager = $userManager;
@@ -27,6 +38,11 @@ class CreateVarnishUnlinkAction
 
     public function execute()
     {
+        if (!isset($_SESSION['login'])) {
+            header('Location: /login');
+            exit;
+        }
+
         $varnishId = $_POST['varnishId'];
         $websiteId = $_POST['websiteId'];
 
