@@ -2,7 +2,6 @@
 
 namespace Snowdog\DevTest\Controller;
 
-
 /**
  * Class SitemapImportAction
  *

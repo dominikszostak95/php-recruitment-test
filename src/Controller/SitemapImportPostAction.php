@@ -22,6 +22,12 @@ class SitemapImportPostAction
      */
     private $userManager;
 
+    /**
+     * SitemapImportPostAction constructor.
+     *
+     * @param SitemapImportManager $sitemapImportManager
+     * @param UserManager $userManager
+     */
     public function __construct(SitemapImportManager $sitemapImportManager, UserManager $userManager)
     {
         $this->sitemapImportManager = $sitemapImportManager;
@@ -35,6 +41,19 @@ class SitemapImportPostAction
     public function execute()
     {
         $siteMap = $_FILES['sitemap'];
-        $this->sitemapImportManager->import($siteMap, $this->user);
+
+        try {
+            $import = $this->sitemapImportManager->import($siteMap, $this->user);
+
+            if ($import) {
+                $_SESSION['flash'] = 'Sitemap successfully imported!';
+            } else {
+                $_SESSION['flash'] = 'Something went wrong. Please try again later.';
+            }
+        } catch (\Exception $e) {
+            $_SESSION['flash'] = $e->getMessage();
+        }
+
+        header('Location: /');
     }
 }

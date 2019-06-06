@@ -2,6 +2,7 @@
 
 use Snowdog\DevTest\Command\MigrateCommand;
 use Snowdog\DevTest\Command\WarmCommand;
+use Snowdog\DevTest\Command\SitemapImportCommand;
 use Snowdog\DevTest\Component\CommandRepository;
 use Snowdog\DevTest\Component\Menu;
 use Snowdog\DevTest\Component\Migrations;
@@ -45,6 +46,7 @@ RouteRepository::registerRoute('POST', '/sitemap-import', SitemapImportPostActio
 
 CommandRepository::registerCommand('migrate_db', MigrateCommand::class);
 CommandRepository::registerCommand('warm [id]', WarmCommand::class);
+CommandRepository::registerCommand('sitemap_import [filePath] [userLogin]', SitemapImportCommand::class);
 
 Menu::register(LoginMenu::class, 200);
 Menu::register(RegisterMenu::class, 250);
